@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Frissítő Pont Masszázsszalon - Szolgáltatások felvitele</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/user.css" rel="stylesheet" type="text/css">
+       
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script>
+            function create_service(){
+                var text=document.getElementById("text");
+                
+                var data={"task":"create service", "text":text.value};
+               console.log(data);
+                $.ajax({
+                    url:"../controller/ServiceController.php",
+                    type:"POST",
+                    data:data,
+                    success:function(rd){
+                      // var x=rd; //---RD=visszajött érték, x.... ami service-ben van, kis/nagybetű érzékeny
+                    console.log(rd);               
+                    },
+                    error:function(){
+                        console.log("error");
+                    }
+                });
+    }    
+        </script>
+        
+    </head>
+    <body onload="servicelisting()">
+       
+         <div id="container">
+            <div id="services">
+            <h1>Szolgáltatások felvitele</h1>
+            
+                    <p>
+                            <label for="type">Megnevezés:</label>
+                            <input type="text" id="type"/>
+                    </p>
+                    <p>
+                            <label for="timecontent">Időtartam (perc):</label>
+                            <input type="text" id="timecontent"/>
+                    </p>                    
+                    <p>
+                            <label for="price">Ár (Ft):</label>
+                            <input type="text" id="price"/>
+                    </p>                    
+                    <p>
+                            <label for="descripton">Leírás:</label>
+                            <input placeholder="kell ez ide?"type="text" id="descripton"/>
+                    </p>
+              
+                   
+                    <button id="button" onclick="create_service()"> Rögzítés </button>
+                
+            
+            </div>
+            
+        </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </body>
+</html>

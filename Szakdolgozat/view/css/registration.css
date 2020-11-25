@@ -1,0 +1,26 @@
+body
+{
+    background: #9FEBAA; 
+}
+
+form
+{
+    margin-left: 50px;
+
+}
+
+button
+{
+   margin: 4px 0 4px 0;
+   text-align: center;
+   color: #FFFFFF;
+   font-weight: bold;
+   font-size: 20px;
+   font-family:calibri;
+   width: 85px;
+   height: 35px;
+   background-color: #21B93A;
+   border: 2px solid;
+   border-color: black;
+   border-radius: 10px;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Frissítő Pont Masszázsszalon</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/user.css" rel="stylesheet" type="text/css">
+       
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script>
+            function create_booking(){
+                var text=document.getElementById("text");
+                
+                var data={"task":"create booking", "text":text.value};
+               console.log(data);
+                $.ajax({
+                    url:"../controller/BookingController.php",
+                    type:"POST",
+                    data:data,
+                    success:function(rd){
+                      // var x=rd; //---RD=visszajött érték, x.... ami service-ben van, kis/nagybetű érzékeny
+                    console.log(rd);               
+                    },
+                    error:function(){
+                        console.log("error");
+                    }
+                });
+    }    
+        </script>
+        
+    </head>
+    <body onload="bookinglisting()">
+       
+         <div id="container">
+            <div id="booking">
+            <h1>Szabad időpontok felvitele (Dinamikus????)</h1>
+            
+                    <p>
+                         <input  type="text" id="datetime" placeholder="Dátum"/>
+                    </p>
+                    
+                    <p>
+                          <input  type="text" id="timestart" placeholder="kezdés (óra, perc)"/>
+                    </p>  
+                    
+                    <p>
+                        <input  type="text" id="timeend" placeholder="befejezés (óra, perc)"/>
+                    </p>             
+  
+                    
+                    <p>
+                            <textarea id="text" placeholder="Admin által rögzített vendég adatai" style="resize:none;" rows="5" cols="30"></textarea>
+                    </p>
+                    
+                    <button id="button" onclick="create_booking()"> Rögzítés </button>
+                
+            
+            </div>
+            
+        </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </body>
+</html>

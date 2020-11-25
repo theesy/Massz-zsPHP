@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Frissítő Pont Masszázsszalon</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/user.css" rel="stylesheet" type="text/css">
+       
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script>
+            function create_open(){
+                var text=document.getElementById("text");
+                
+                var data={"task":"create open", "text":text.value};
+               console.log(data);
+                $.ajax({
+                    url:"../controller/OpenController.php",
+                    type:"POST",
+                    data:data,
+                    success:function(rd){
+                      // var x=rd; //---RD=visszajött érték, x.... ami service-ben van, kis/nagybetű érzékeny
+                    console.log(rd);               
+                    },
+                    error:function(){
+                        console.log("error");
+                    }
+                });
+    }    
+        </script>
+        
+    </head>
+    <body onload="userlisting()">
+       
+         <div id="container">
+            <div id="open">
+            <h1>Nyitvatartás rögzítése</h1>
+            
+                   <p>
+                            <label for="day">Nap</label>
+                            <input type="text" id="day"/>
+                    </p>
+                    <p>
+                            <label for="from">nyitás</label>
+                            <input type="text" id="from"/>
+                    </p>                    
+                    <p>
+                            <label for="to">zárás</label>
+                            <input type="text" id="to"/>
+                    </p>    
+                     <p>
+                            <label for="isholiday">isholiday????</label>
+                            <input type="text" id="isholiday"/>
+                    </p> 
+                     <p>
+                            <label for="holidaymsg">szabadság üzenet???</label>
+                            <input type="text" id="holidaymsg"/>
+                    </p> 
+                    <p>
+                            <label for="closed">Zárva?</label>
+                            <input type="text" id="closed"/>
+                    </p> 
+              
+                   
+                            <button id="button" onclick="create_open()"> Felvitel </button>
+                
+            
+            </div>
+            
+        </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </body>
+</html>

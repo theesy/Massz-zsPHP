@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Frissítő Pont Masszázsszalon</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/user.css" rel="stylesheet" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script>
+            function userlisting(){
+                var table=document.getElementById("usertable");
+                var data={"task":"get user", "ID":"8"};
+                $.ajax({
+                    url:"../../controller/UserController.php",
+                    type:"post",
+                    data:data,
+                    success:function(RD){
+                        var x=RD; //---RD=visszajött érték, x.... ami user service-ben van, kis/nagybetű érzékeny
+                        //---alert(x.Email);
+                    table.innerHTML="Üdvözlünk " +x.FirstName+"!<BR>";
+                  
+                    },
+                    error:function(){
+                        alert("Hiba");
+                    }
+                })    ;
+    }    
+        </script>
+        
+    </head>
+    <body>
+       
+        <div class="container">
+           <button onclick="userlisting()" type="button" class="btn btn-primary">Próba</button>
+        </div>
+        
+    <div id="usertable"></div>
+    
+    
+    <div class="usertable">
+    <h2>Regisztrált felhasználók</h2>        
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Vezetéknév</th>
+            <th>Keresztnév</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="usertable">
+            <td>John</td>
+            <td>Doe</td>
+          </tr>
+          <tr>
+            <td>Mary</td>
+            <td>Moe</td>
+          </tr>
+          <tr>
+            <td>July</td>
+            <td>Dooley</td>            
+          </tr>
+        </tbody>
+        </table>
+     </div>
+    
+
+        
+    </body>
+</html>
