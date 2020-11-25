@@ -70,24 +70,47 @@ class UserService {
     }
     
      public function createUser($user){
-        $s=new UserService();
+        $s=new UserService(); 
         $u=$user; 
         $b=$s->dbcon;
-        $salt=UserService::getSaltSting();
+        $salt=UserService::getSaltSting(); 
         $sql='CALL create_user ("'.$u->getEmail().'","'.$u->getPassword().$salt.'","'.$u->getFirstName().'","'.$u->getLastName().'","'.$u->getPhone().'","'.$u->getUserName().'","'.$u->getConfirmUrl().'")';
-        file_put_contents("sql.txt", $sql);
-        $query=mysqli_query($b,$sql);
-        $id=mysqli_query($b,"select max(id) as id from user");
-        $idnumber= mysqli_fetch_assoc($id);
-        file_put_contents("sql.txt", $idnumber["id"]);
+        
+        //file_put_contents("sql.txt", $sql); --teszteléshez kellett
+        $query=mysqli_query($b,$sql); 
+        $id=mysqli_query($b,"select max(id) as id from user"); 
+        $idnumber= mysqli_fetch_assoc($id); 
+        //file_put_contents("sql.txt", $idnumber["id"]); --teszthez kellett
         $user=$s->readUser($idnumber["id"]);
+        if($s->sendemail($user)){
+            //ide írjuk, amit sikeres mail küldés esetén szeretnénk csinálni
+        }
+        //else ág: sikertelen email küldés esetén
+
         return $user; 
     }
     
     public function login($user, $password) {
-        //itt folytatjuk!!!
-                
+        
+        $s=new UserService(); 
+        $b=$s->dbcon;
+        $sql='CALL login("'.$user.'","'.$password.'")';
+        $query=mysqli_query($b,$sql); 
+        $idnumber= mysqli_fetch_assoc($query); 
+        $u=$s->readUser($idnumber["id"]); 
+        return $u;
+        
     }
 
+    
+    public function sendemail($user){
+        
+        $to = $user->getEmail();
+        $subject = "Regisztráció megerősítése";
+        $txt = "Kérjük, hogy a regisztráció megerősítéséhez kattints a következő linkre.".$user->getConfirmUrl();
+        $headers = "From: webmaster@example.com"; //küldő e-mail címe
+        $return=mail($to,$subject,$txt,$headers);
+        return $return;        
+    }
 }
 

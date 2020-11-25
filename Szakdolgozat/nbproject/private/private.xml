@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Szakdolgozat/controller/GalleryController.php</file>
-            <file>file:/C:/xampp/htdocs/Szakdolgozat/controller/BookingController.php</file>
-            <file>file:/C:/xampp/htdocs/Szakdolgozat/service/BookingService.php</file>
-            <file>file:/C:/xampp/htdocs/Szakdolgozat/view/user/user.html</file>
-            <file>file:/C:/xampp/htdocs/Szakdolgozat/controller/ContactController.php</file>
+            <file>file:/C:/Users/thees/Documents/GitHub/Massz-zsPHP/Szakdolgozat/controller/UserController.php</file>
+            <file>file:/C:/Users/thees/Documents/GitHub/Massz-zsPHP/Szakdolgozat/model/User.php</file>
+            <file>file:/C:/Users/thees/Documents/GitHub/Massz-zsPHP/Szakdolgozat/controller/GalleryController.php</file>
+            <file>file:/C:/Users/thees/Documents/GitHub/Massz-zsPHP/Szakdolgozat/service/UserService.php</file>
+            <file>file:/C:/Users/thees/Documents/GitHub/Massz-zsPHP/Szakdolgozat/service/GalleryService.php</file>
+            <file>file:/C:/Users/thees/Documents/GitHub/Massz-zsPHP/Szakdolgozat/upload/upload.php</file>
         </group>
     </open-files>
 </project-private>

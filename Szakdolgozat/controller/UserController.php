@@ -14,8 +14,12 @@ function getAllUsers ($page) { //fixed me routingolás
     return $result;
 }
 
+/*
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['task'])){
+    $task=$_POST["task"];
+}*/
+$task="create user";
 
-$task=$_POST["task"];
 //$page=$_POST["page"]; //kivesszük őket
 $x=new UserService();
 if ($task=="listing") {
@@ -58,16 +62,25 @@ if($task=="delete user"){
 }
 
 if($task=="create user"){
-    $email= trim(strip_tags($_POST['email']));   //strip_tags leszedi a html kódokat, hogy adb-be ne kerüljenek bele, sztring két oldalát is leszedi
+    $email= trim(strip_tags($_POST['email']));   //strip_tags leszedi a html kódokat, hogy adb-be ne kerüljenek bele, sztring két oldalát is leszedi, sql injection ellehetlenít, támadások ellen, pl. tábla törlés ellen
     $password=trim(strip_tags($_POST['password']));
     $firstname=trim(strip_tags($_POST['firstname']));
     $lastname=trim(strip_tags($_POST['lastname']));
     $phone=trim(strip_tags($_POST['phone']));
     $username=trim(strip_tags($_POST['username']));
     $url= sha1(time().$email); //time=1970 óta eltelt sec száma + user mailje
-    file_put_contents("alma.txt", $username);
-    $user=new User(1, $email, $password, $firstname, $lastname, $phone, $username, $url);
-    $user=$x->createUser($user);
-    $userdata=$x->userToArray($user);
+    //file_put_contents("alma.txt", $username); -- teszthez kellett
+    $user=new User(1, $email, $password, $firstname, $lastname, $phone, $username, $url); //user lepéldányosítva
+    $keszuser=$x->createUser($user); //meghívjuk createUser-t ez másik $user már, a példányt adjuk át
+    $userdata=$x->userToArray($keszuser);
     print json_encode($userdata); //átkonvertálja a user adatait, az asszoc. tömböt json formátumba teszi
     }
+    
+    
+  if($task=="login"){
+    $user= trim(strip_tags($_POST['user']));
+    $password=trim(strip_tags($_POST['password']));
+    $keszuser=$x->login($user, $password);
+    $userdata=$x->userToArray($keszuser);
+    print json_encode($userdata); //átkonvertálja a user adatait, az asszoc. tömböt json formátumba teszi
+  }

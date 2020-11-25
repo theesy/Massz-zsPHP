@@ -62,6 +62,20 @@ class GalleryService {
         $gallery=$s->readGallery($idnumber["id"]);
         return $gallery; 
     }
+    
+    public function newImage($gallery){
+        $s=new GalleryService();
+        $g=$gallery; 
+        $b=$s->dbcon;
+        $sql='CALL create_gallery ("'.$g->getImageUrl().'",0,0)'; //fogy.köv pénteken
+        file_put_contents("sql.txt", $sql);
+        $query=mysqli_query($b,$sql);
+        $id=mysqli_query($b,"select max(id) as id from gallery");
+        $idnumber= mysqli_fetch_assoc($id);
+        file_put_contents("sql.txt", $idnumber["id"]);
+        $gallery=$s->readGallery($idnumber["id"]);
+        return $gallery; 
+    }
 }
 
 
